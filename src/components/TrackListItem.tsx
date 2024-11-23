@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   },
   img: {
     aspectRatio: 1,
-    borderRadius: 10,
+    borderRadius: 5,
     height: 60,
     marginRight: 10,
   },
