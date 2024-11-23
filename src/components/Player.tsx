@@ -1,15 +1,16 @@
 import { View, Text, StyleSheet, Image } from "react-native";
 import React from "react";
-import { tracks } from "@/assets/data/tracks";
+
 import { Ionicons } from "@expo/vector-icons";
+import { usePlayerContext } from "../providers/PlayerProvider";
 const Player = () => {
-  const track = tracks[0];
+  const { track } = usePlayerContext();
   if (!track) return null;
   return (
     <View style={styles.container}>
       <View style={styles.player}>
         <Image style={styles.img} source={{ uri: track.album.images[0].url }} />
-        <View style={{ flex: 1, flexShrink: 1 }}>
+        <View style={{ flex: 1 }}>
           <Text style={styles.albname}>{track.name}</Text>
           <Text style={styles.artist}>{track.artists[0].name}</Text>
         </View>
@@ -32,7 +33,7 @@ const Player = () => {
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    top: -75,
+    top: -80,
     height: 75,
     padding: 10,
     width: "100%",
@@ -51,19 +52,16 @@ const styles = StyleSheet.create({
     height: "100%",
     aspectRatio: 1,
     borderRadius: 5,
+    marginRight: 10,
   },
   albname: {
     color: "white",
-    fontSize: 15,
-    marginRight: 2,
-    marginLeft: 10,
+
     fontWeight: "500",
-    flexShrink: 1,
   },
   artist: {
-    color: "grey",
+    color: "lightgray",
     fontSize: 12,
-    marginHorizontal: 10,
   },
 });
 export default Player;
