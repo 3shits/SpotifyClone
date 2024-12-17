@@ -22,7 +22,11 @@ const Player = () => {
       : undefined;
   }, [sound]);
   const playTrack = async () => {
-    if (!track?.preview_url) return;
+    if (!track?.preview_url) {
+      await sound?.unloadAsync();
+      setTrackPos(0);
+      return;
+    }
 
     const { sound: newSound } = await Audio.Sound.createAsync({
       uri: track.preview_url,
@@ -66,10 +70,12 @@ const Player = () => {
           color={"white"}
           style={{ marginHorizontal: 10 }}
         />
+
         <Ionicons
           disabled={!track?.preview_url}
           name={isPlaying ? "pause" : "play"}
           size={22}
+          style={{ display: track.preview_url ? "flex" : "none" }}
           color={track?.preview_url ? "white" : "gray"}
           onPress={PlayPauseTrack}
         />
